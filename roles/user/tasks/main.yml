@@ -1,0 +1,16 @@
+- name: create main user
+  user:
+    name: "{{ main_user_name }}"
+    shell: /bin/zsh
+    append: yes
+
+- name: create var dir
+  file: path=/home/{{ main_user_name }}/var state=directory owner={{ main_user_name }} group={{ main_user_name }} mode=0770
+- name: create usr dir
+  file: path=/home/{{ main_user_name }}/usr state=directory owner={{ main_user_name }} group={{ main_user_name }} mode=0770
+- name: create usr/src dir
+  file: path=/home/{{ main_user_name }}/usr/src state=directory owner={{ main_user_name }} group={{ main_user_name }} mode=0770
+- name: create bin dir
+  file: path=/home/{{ main_user_name }}/bin state=directory owner={{ main_user_name }} group={{ main_user_name }} mode=0770
+- name: create opt dir
+  file: path=/home/{{ main_user_name }}/opt state=directory owner={{ main_user_name }} group={{ main_user_name }} mode=0770

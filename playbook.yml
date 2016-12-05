@@ -1,6 +1,0 @@
-- hosts: localhost
-  connection: local
-  become: true
-  tasks:
-  - name: install chromium
-    apt: name=chromium-browser state=latest update_cache=yes cache_valid_time=600

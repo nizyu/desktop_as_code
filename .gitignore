@@ -155,3 +155,6 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+#### custom ####
+vars/main.yml
