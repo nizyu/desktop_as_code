@@ -3,6 +3,7 @@
   vars_files:
     - vars/main.yml
   roles:
-    - packages/chromium
     - user
+    - packages/chromium
+    - docker
   become: true
