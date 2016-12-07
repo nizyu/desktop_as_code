@@ -1,0 +1,2 @@
+- name: include zsh task
+  include: roles/packages/zsh/main.yml
