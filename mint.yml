@@ -4,6 +4,6 @@
     - vars/main.yml
   roles:
     - user
-    - packages/chromium
+    - browser
     - docker
   become: true

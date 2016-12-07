@@ -1,0 +1,2 @@
+- name: include chromium task
+  include: roles/packages/chromium/main.yml
