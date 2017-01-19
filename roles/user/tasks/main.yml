@@ -14,3 +14,5 @@
   file: path=/home/{{ main_user_name }}/bin state=directory owner={{ main_user_name }} group={{ main_user_name }} mode=0770
 - name: create opt dir
   file: path=/home/{{ main_user_name }}/opt state=directory owner={{ main_user_name }} group={{ main_user_name }} mode=0770
+- name: create tmp dir
+  file: path=/home/{{ main_user_name }}/tmp state=directory owner={{ main_user_name }} group={{ main_user_name }} mode=0770
