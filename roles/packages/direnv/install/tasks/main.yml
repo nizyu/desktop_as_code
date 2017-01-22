@@ -1,0 +1,17 @@
+- name: downlod source code
+  git: 
+    repo: https://github.com/direnv/direnv.git
+    dest: /home/{{ main_user_name }}/usr/src/direnv
+    version: master 
+
+- name: permission
+  file: 
+    dest: /home/{{ main_user_name }}/usr/src/direnv
+    owner: "{{ main_user_name }}"
+    group: "{{ main_user_name }}"
+    recurse: yes
+
+- name: install
+  command: "make -j{{ ansible_processor_count * 2 }} install chdir=/home/{{ main_user_name }}/usr/src/direnv"
+  environment:
+    DESTDIR: "/home/{{ main_user_name }}/usr"

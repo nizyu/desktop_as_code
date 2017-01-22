@@ -1,0 +1,4 @@
+dependencies:
+  - { role: packages/docker/install }
+  - { role: packages/docker-compose/install }
+  - { role: packages/neovim/install }

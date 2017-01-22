@@ -1,0 +1,51 @@
+- name: install dependency libs for building neovim
+  apt: name={{ item }} state=latest update_cache=yes cache_valid_time=600
+  with_items: 
+    - libtool
+    - libtool-bin
+    - autoconf
+    - automake
+    - cmake
+    - g++
+    - pkg-config
+    - unzip
+  when: "'Debian' in ansible_distribution or 'Ubuntu' in ansible_distribution or 'mint' in ansible_distribution"
+
+- name: install dependency libs for building neovim
+  pacman: name={{ item }} state=present
+  with_items: 
+    - base-devel
+    - cmake
+    - unzip
+  when: "'Arch' in ansible_distribution or 'Manjaro' in ansible_distribution"
+
+- name: downlod source code
+  git: 
+    repo: https://github.com/neovim/neovim.git
+    dest: /home/{{ main_user_name }}/usr/src/neovim
+    version: master 
+
+- name: permission
+  file: 
+    dest: /home/{{ main_user_name }}/usr/src/neovim
+    owner: "{{ main_user_name }}"
+    group: "{{ main_user_name }}"
+    recurse: yes
+
+- name: build
+  command: "make CMAKE_BUILD_TYPE=Release -j{{ ansible_processor_count * 2 }} CMAKE_EXTRA_FLAGS='-DCMAKE_INSTALL_PREFIX:PATH=/home/{{ main_user_name }}/usr' chdir=/home/{{ main_user_name }}/usr/src/neovim"
+
+- name: install
+  make:
+    chdir: /home/{{ main_user_name }}/usr/src/neovim
+    target: install
+
+- name: cleanup1
+  make:
+    chdir: /home/{{ main_user_name }}/usr/src/neovim
+    target: clean
+
+- name: cleanup2
+  file:
+    path: /home/{{ main_user_name }}/usr/src/neovim/build
+    state: absent

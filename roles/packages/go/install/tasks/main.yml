@@ -1,0 +1,7 @@
+- name: install go
+  apt: name=golang state=latest update_cache=yes cache_valid_time=600
+  when: "'Debian' in ansible_distribution or 'Ubuntu' in ansible_distribution or 'mint' in ansible_distribution"
+
+- name: install go
+  pacman: name=go state=present
+  when: "'Arch' in ansible_distribution or 'Manjaro' in ansible_distribution"
