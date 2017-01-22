@@ -3,8 +3,12 @@
   vars_files:
     - vars/main.yml
   roles:
-    - shell
+    - system_base
+    - system_admin
     - user
-    - browser
-    - docker
+    - user_utilities
+    - desktop
+    - develop
+    - multi_media
   become: true
+  tasks:

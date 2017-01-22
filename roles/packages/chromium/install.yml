@@ -1,7 +1,0 @@
-- name: install chromium
-  apt: name=chromium-browser state=latest update_cache=yes cache_valid_time=600
-  when: "'Debian' in ansible_distribution or 'Ubuntu' in ansible_distribution or 'mint' in ansible_distribution"
-
-- name: install chromium
-  pacman: name=chromium state=present
-  when: "'Arch' in ansible_distribution or 'Manjaro' in ansible_distribution"
