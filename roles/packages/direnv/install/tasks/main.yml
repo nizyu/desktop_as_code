@@ -2,7 +2,8 @@
   git: 
     repo: https://github.com/direnv/direnv.git
     dest: /home/{{ main_user_name }}/usr/src/direnv
-    version: master 
+    depth: 1
+    version: "{{ version }}"
 
 - name: permission
   file: 

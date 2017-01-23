@@ -23,7 +23,8 @@
   git: 
     repo: https://github.com/neovim/neovim.git
     dest: /home/{{ main_user_name }}/usr/src/neovim
-    version: master 
+    depth: 1
+    version: "{{ version }}"
 
 - name: permission
   file: 
