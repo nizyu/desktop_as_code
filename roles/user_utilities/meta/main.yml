@@ -1,3 +1,4 @@
 dependencies:
   - { role: packages/direnv/install }
   - { role: packages/oh-my-zsh/install }
+  - { role: packages/neovim/config }

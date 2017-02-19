@@ -1,0 +1,9 @@
+- name: Ensures conf dir exists
+  file: path=/home/{{ main_user_name }}/.config/nvim state=directory
+
+- name: copy init script
+  copy:
+    src: init.vim
+    dest: /home/{{ main_user_name }}/.config/nvim/init.vim
+    owner: "{{ main_user_name }}"
+    group: "{{ main_user_name }}"
