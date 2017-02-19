@@ -1,3 +1,6 @@
 PATH=~/bin:~/usr/bin:$PATH
+EDITOR='nvim'
 
 eval "$(direnv hook zsh)"
+
+alias nv='nvim'
