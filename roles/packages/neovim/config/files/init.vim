@@ -7,6 +7,7 @@ set nocompatible
 
 set number         " 行番号を表示する
 set cursorline     " カーソル行の背景色を変える
+set nocursorcolumn " カーソル列の背景色を変えない
 set laststatus=2   " ステータス行を常に表示
 set cmdheight=2    " メッセージ表示欄を2行確保
 set showmatch      " 対応する括弧を強調表示
@@ -66,6 +67,7 @@ set noerrorbells "エラーメッセージの表示時にビープを鳴らさ�
 """
 call plug#begin('~/~/.local/share/nvim/plugged')
 
-Plug 'justinmk/vim-dirvish' "vim filer
+Plug 'Shougo/vimfiler.vim' "vim filer
+Plug 'Shougo/unite.vim' "vim filer
 
 call plug#end()
