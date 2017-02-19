@@ -36,3 +36,10 @@
   lineinfile: >
     dest='/home/{{ main_user_name }}/.zshrc'
     line='[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local'
+
+- name: copy script
+  copy:
+    src: zshrc.common
+    dest: /home/{{ main_user_name }}/.zshrc.common
+    owner: "{{ main_user_name }}"
+    group: "{{ main_user_name }}"
