@@ -55,8 +55,6 @@ set clipboard=unnamed,unnamedplus
 set mouse=a
 " Windows でもパスの区切り文字を / にする
 set shellslash
-" インサートモードから抜けると自動的にIMEをオフにする
-set iminsert=2
 
 " コマンドラインの設定
 
