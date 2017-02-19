@@ -1,2 +1,3 @@
 dependencies:
   - { role: packages/direnv/install }
+  - { role: packages/oh-my-zsh/install }

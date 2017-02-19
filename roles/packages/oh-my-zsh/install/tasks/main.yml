@@ -1,0 +1,38 @@
+- name: downlod source code
+  git: 
+    repo: https://github.com/robbyrussell/oh-my-zsh.git
+    dest: /home/{{ main_user_name }}/usr/src/oh-my-zsh
+    depth: 1
+    version: master
+
+- name: deploy oh-my-zsh
+  file:
+    src: /home/{{ main_user_name }}/usr/src/oh-my-zsh
+    dest: /home/{{ main_user_name }}/.oh-my-zsh
+    owner: "{{ main_user_name }}"
+    group: "{{ main_user_name }}"
+    state: link
+
+- name: replace zshrc
+  copy:
+    src: /home/{{ main_user_name }}/usr/src/oh-my-zsh/templates/zshrc.zsh-template
+    dest: /home/{{ main_user_name }}/.zshrc
+    owner: "{{ main_user_name }}"
+    group: "{{ main_user_name }}"
+    remote_src: yes
+
+- name: change theme
+  lineinfile: >
+    dest='/home/{{ main_user_name }}/.zshrc'
+    regexp='ZSH_THEME='
+    line='ZSH_THEME=steeef'
+
+- name: include common script
+  lineinfile: >
+    dest='/home/{{ main_user_name }}/.zshrc'
+    line='[[ -f ~/.zshrc.common ]] && source ~/.zshrc.common'
+
+- name: include local script
+  lineinfile: >
+    dest='/home/{{ main_user_name }}/.zshrc'
+    line='[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local'
