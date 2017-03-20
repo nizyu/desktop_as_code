@@ -65,9 +65,13 @@ set noerrorbells "エラーメッセージの表示時にビープを鳴らさ�
 """
 " vim-plug
 """
-call plug#begin('~/~/.local/share/nvim/plugged')
+call plug#begin('~/.local/share/nvim/plugged')
 
-Plug 'Shougo/vimfiler.vim' "vim filer
-Plug 'Shougo/unite.vim' "vim filer
+Plug 'Shougo/denite.nvim', { 'do': 'nvim --headless +UpdateRemotePlugins +qall'}
+Plug 'Shougo/deoplete.nvim', { 'do': 'nvim --headless +UpdateRemotePlugins +qall'}
+Plug 'Shougo/vimfiler.vim'
+Plug 'Shougo/unite.vim'
 
 call plug#end()
+
+let g:deoplete#enable_at_startup = 1
