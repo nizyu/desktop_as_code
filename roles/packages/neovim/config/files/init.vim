@@ -1,7 +1,5 @@
-syntax on
-colorscheme koehler
 
-" 一旦ファイルタイプ関連を無効化する
+" 一旦FiletypeをOFFにする
 filetype off
 filetype plugin indent off
 
@@ -57,31 +55,19 @@ set wildmenu wildmode=list:longest,full
 " コマンドラインの履歴を10000件保存する
 set history=10000
 
+" マウスの設定
+
+set mouse=a " 全モードでマウスを使えるように
+
 " ビープの設定
 
 "ビープ音すべてを無効にする
 set visualbell t_vb=
 set noerrorbells "エラーメッセージの表示時にビープを鳴らさない
 
-""" statusline関連
-" ファイル名表示
-set statusline=%F
-" 変更チェック表示
-set statusline+=%m
-" 読み込み専用かどうか表示
-set statusline+=%r
-" ヘルプページなら[HELP]と表示
-set statusline+=%h
-" プレビューウインドウなら[Prevew]と表示
-set statusline+=%w
-" これ以降は右寄せ表示
-set statusline+=%=
-" file encoding
-set statusline+=[ENC=%{&fileencoding}]
-" 現在行数/全行数
-set statusline+=[LOW=%l/%L]
-" ステータスラインを常に表示(0:表示しない、1:2つ以上ウィンドウがある時だけ表示)
-set laststatus=2
+
+
+
 
 """
 " vim-plug
@@ -90,14 +76,49 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'Shougo/denite.nvim', { 'do': 'nvim --headless +UpdateRemotePlugins +qall'}
 Plug 'Shougo/deoplete.nvim', { 'do': 'nvim --headless +UpdateRemotePlugins +qall'}
-Plug 'Shougo/vimfiler.vim'
-Plug 'Shougo/unite.vim'
+
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+Plug 'airblade/vim-gitgutter'
+
+
+Plug 'joshdick/onedark.vim'
+Plug 'sheerun/vim-polyglot'
+
+Plug 'vim-airline/vim-airline'
+Plug 'tpope/vim-fugitive'
+
+
+Plug 'Yggdroot/indentLine'
+
 Plug 'cohama/lexima.vim' "auto close 周りの自動設定
 
 call plug#end()
 
+
 " deoplete
 let g:deoplete#enable_at_startup = 1
+
+""" colorsheme
+let g:onedark_termcolors=256
+syntax on
+colorscheme onedark
+
+""" statusline関連
+let g:airline_theme='onedark'
+
+" Powerline系フォントを利用する
+let g:airline_powerline_fonts = 1
+
+" タブバーのカスタマイズを有効にする
+let g:airline#extensions#tabline#enabled = 1
+
+" タブバーの右領域を非表示にする
+let g:airline#extensions#tabline#show_splits = 0
+let g:airline#extensions#tabline#show_tab_type = 0
+let g:airline#extensions#tabline#show_close_button = 0
 
 
 " ファイルタイプ関連を有効化する
