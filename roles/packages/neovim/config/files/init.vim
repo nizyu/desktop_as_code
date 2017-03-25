@@ -1,4 +1,3 @@
-
 " 一旦FiletypeをOFFにする
 filetype off
 filetype plugin indent off
@@ -61,24 +60,51 @@ set mouse=a " 全モードでマウスを使えるように
 
 " ビープの設定
 
-"ビープ音すべてを無効にする
+" ビープ音すべてを無効にする
 set visualbell t_vb=
 set noerrorbells "エラーメッセージの表示時にビープを鳴らさない
 
-
-
-
-
+" スペルチェック(日本語は除外)
+"""set spell
+"""set spelllang=en,cjk
+"""fun! s:SpellConf()
+"""  redir! => syntax
+"""  silent syntax
+"""  redir END
 """
-" vim-plug
+"""  set spell
 """
+"""  if syntax =~? '/<comment\>'
+"""    syntax spell default
+"""    syntax match SpellMaybeCode /\<\h\l*[_A-Z]\h\{-}\>/ contains=@NoSpell transparent containedin=Comment contained
+"""  else
+"""    syntax spell toplevel
+"""    syntax match SpellMaybeCode /\<\h\l*[_A-Z]\h\{-}\>/ contains=@NoSpell transparent
+"""  endif
+"""
+"""  syntax cluster Spell add=SpellNotAscii,SpellMaybeCode
+"""endfunc
+"""
+"""augroup spell_check
+"""  autocmd!
+"""  autocmd BufReadPost,BufNewFile,Syntax * call s:SpellConf()
+"""augroup END
+
+" leaderをスペースに割り当てておく
+let mapleader = "\<Space>"
+
+
+
+""""""""""""
+" vim-plug "
+""""""""""""
 call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'Shougo/denite.nvim', { 'do': 'nvim --headless +UpdateRemotePlugins +qall'}
 Plug 'Shougo/deoplete.nvim', { 'do': 'nvim --headless +UpdateRemotePlugins +qall'}
 
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'jistr/vim-nerdtree-tabs'
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs' "いろんなタブでNERDTreeを同時に開いたり閉じたり？
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 Plug 'airblade/vim-gitgutter'
@@ -90,6 +116,9 @@ Plug 'sheerun/vim-polyglot'
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-fugitive'
 
+Plug 'terryma/vim-expand-region' "選択範囲の拡大縮小を便利に
+
+Plug 'chrisbra/SudoEdit.vim'
 
 Plug 'Yggdroot/indentLine'
 
@@ -112,13 +141,32 @@ let g:airline_theme='onedark'
 " Powerline系フォントを利用する
 let g:airline_powerline_fonts = 1
 
-" タブバーのカスタマイズを有効にする
-let g:airline#extensions#tabline#enabled = 1
+" jistr/vim-nerdtree-tabs
+if argc() == 0
+  let g:nerdtree_tabs_open_on_console_startup = 1
+endif
+map <Leader>n <plug>NERDTreeTabsToggle<CR>
 
-" タブバーの右領域を非表示にする
-let g:airline#extensions#tabline#show_splits = 0
-let g:airline#extensions#tabline#show_tab_type = 0
-let g:airline#extensions#tabline#show_close_button = 0
+" terryma/vim-expand-region
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
+
+" tab関連
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+
+nnoremap    [Tag]   <Nop>
+nmap    t [Tag]
+
+map <silent> [Tag]c :tablast <bar> tabnew<CR>
+" tc 新しいタブを一番右に作る
+map <silent> [Tag]x :tabclose<CR>
+" tx タブを閉じる
+map <silent> [Tag]n :tabnext<CR>
+" tn 次のタブ
+map <silent> [Tag]p :tabprevious<CR>
+" tp 前のタブ
 
 
 " ファイルタイプ関連を有効化する
