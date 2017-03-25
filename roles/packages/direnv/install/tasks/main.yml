@@ -4,15 +4,10 @@
     dest: /home/{{ main_user_name }}/usr/src/direnv
     depth: 1
     version: "{{ version }}"
-
-- name: permission
-  file: 
-    dest: /home/{{ main_user_name }}/usr/src/direnv
-    owner: "{{ main_user_name }}"
-    group: "{{ main_user_name }}"
-    recurse: yes
+  become: no
 
 - name: install
   command: "make -j{{ ansible_processor_count * 2 }} install chdir=/home/{{ main_user_name }}/usr/src/direnv"
   environment:
     DESTDIR: "/home/{{ main_user_name }}/usr"
+  become: no

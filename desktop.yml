@@ -3,8 +3,6 @@
   vars_files:
     - vars/main.yml
   roles:
-    - system_base
-    - system_admin
     - user
     - user_utilities
     - desktop

@@ -25,6 +25,7 @@
     dest: /home/{{ main_user_name }}/usr/src/neovim
     depth: 1
     version: "{{ version }}"
+  become: no
 
 - name: permission
   file: 
@@ -32,21 +33,26 @@
     owner: "{{ main_user_name }}"
     group: "{{ main_user_name }}"
     recurse: yes
+  become: no
 
 - name: build
   command: "make CMAKE_BUILD_TYPE=Release -j{{ ansible_processor_count * 2 }} CMAKE_EXTRA_FLAGS='-DCMAKE_INSTALL_PREFIX:PATH=/home/{{ main_user_name }}/usr' chdir=/home/{{ main_user_name }}/usr/src/neovim"
+  become: no
 
 - name: install
   make:
     chdir: /home/{{ main_user_name }}/usr/src/neovim
     target: install
+  become: no
 
 - name: cleanup1
   make:
     chdir: /home/{{ main_user_name }}/usr/src/neovim
     target: clean
+  become: no
 
 - name: cleanup2
   file:
     path: /home/{{ main_user_name }}/usr/src/neovim/build
     state: absent
+  become: no
