@@ -100,8 +100,8 @@ let mapleader = "\<Space>"
 """"""""""""
 call plug#begin('~/.local/share/nvim/plugged')
 
-Plug 'Shougo/denite.nvim', { 'do': 'nvim --headless +UpdateRemotePlugins +qall'}
-Plug 'Shougo/deoplete.nvim', { 'do': 'nvim --headless +UpdateRemotePlugins +qall'}
+Plug 'Shougo/denite.nvim', { 'do': 'nvim --headless +UpdateRemotePlugins +qall' }
+Plug 'Shougo/deoplete.nvim', { 'do': 'nvim --headless +UpdateRemotePlugins +qall' }
 
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs' "いろんなタブでNERDTreeを同時に開いたり閉じたり？
@@ -124,6 +124,12 @@ Plug 'Yggdroot/indentLine'
 
 Plug 'cohama/lexima.vim' "auto close 周りの自動設定
 
+" javascript
+Plug 'othree/yajs.vim', { 'for': 'javascript' } "es6 color
+
+" Golang
+Plug 'fatih/vim-go'
+
 call plug#end()
 
 
@@ -137,9 +143,8 @@ colorscheme onedark
 
 """ statusline関連
 let g:airline_theme='onedark'
-
-" Powerline系フォントを利用する
-let g:airline_powerline_fonts = 1
+let g:airline_left_sep=''
+let g:airline_right_sep=''
 
 " jistr/vim-nerdtree-tabs
 if argc() == 0
@@ -159,15 +164,14 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 nnoremap    [Tag]   <Nop>
 nmap    t [Tag]
 
-map <silent> [Tag]c :tablast <bar> tabnew<CR>
-" tc 新しいタブを一番右に作る
-map <silent> [Tag]x :tabclose<CR>
-" tx タブを閉じる
-map <silent> [Tag]n :tabnext<CR>
-" tn 次のタブ
-map <silent> [Tag]p :tabprevious<CR>
-" tp 前のタブ
+map <silent> [Tag]c :tablast <bar> tabnew<CR> " tc 新しいタブを一番右に作る
+map <silent> [Tag]x :tabclose<CR>             " tx タブを閉じる
+map <silent> [Tag]n :tabnext<CR>              " tn 次のタブ
+map <silent> [Tag]p :tabprevious<CR>          " tp 前のタブ
 
+
+" javascript
+autocmd BufRead,BufNewFile *.es6 setfiletype javascript
 
 " ファイルタイプ関連を有効化する
 filetype plugin indent on
