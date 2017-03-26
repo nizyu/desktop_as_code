@@ -10,6 +10,10 @@
 - name: create usr dir
   file: path=/home/{{ main_user_name }}/usr state=directory owner={{ main_user_name }} group={{ main_user_name }} mode=0770
   become: no
+- name: create usr/lib dir
+  file: path=/home/{{ main_user_name }}/usr/lib state=directory owner={{ main_user_name }} group={{ main_user_name }} mode=0770
+- name: create usr/lib/go dir
+  file: path=/home/{{ main_user_name }}/usr/lib/go state=directory owner={{ main_user_name }} group={{ main_user_name }} mode=0770
 - name: create usr/src dir
   file: path=/home/{{ main_user_name }}/usr/src state=directory owner={{ main_user_name }} group={{ main_user_name }} mode=0770
   become: no
