@@ -20,7 +20,14 @@
     dest: /home/{{ main_user_name }}/.local/share/nvim/site/autoload/plug.vim
   become: no
 
-- name: install python3-neovim
-  pip: 
-   name: neovim
-   executable: pip3
+- name: install python3 packages for neovim
+  pip: name={{ item }} executable=pip3
+  with_items:
+    - neovim
+    - websocket-client
+    - sexpdata
+
+- name: install python2 packages for neovim
+  pip: name={{ item }} executable=pip2
+  with_items:
+    - neovim

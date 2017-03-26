@@ -1,4 +1,7 @@
-export PATH=~/bin:~/usr/bin:$PATH
+# Golang
+export GOPATH=~/usr/lib/go
+
+export PATH=~/bin:~/usr/bin:$GOPATH/bin:$PATH
 export EDITOR='nvim'
 
 # ターミナルをカラフルにする設定（ほぼおまじない）
@@ -10,5 +13,3 @@ then
 export TERM=rxvt-256color
 fi
 
-# Golang
-export GOPATH=~/usr/lib/go
