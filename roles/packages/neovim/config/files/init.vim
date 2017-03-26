@@ -3,7 +3,6 @@ filetype off
 filetype plugin indent off
 
 " 画面表示の設定
-
 set number         " 行番号を表示する
 set cursorline     " カーソル行の背景色を変える
 set nocursorcolumn " カーソル列の背景色を変えない
@@ -16,7 +15,6 @@ set list           " 不可視文字を表示
 set listchars=tab:▸\ ,eol:↲,extends:❯,precedes:❮
 
 " カーソル移動関連の設定
-
 set backspace=indent,eol,start " Backspaceキーの影響範囲に制限を設けない
 set whichwrap=b,s,h,l,<,>,[,]  " 行頭行末の左右移動で行をまたぐ
 set scrolloff=8                " 上下8行の視界を確保
@@ -24,7 +22,6 @@ set sidescrolloff=16           " 左右スクロール時の視界を確保
 set sidescroll=1               " 左右スクロールは一文字づつ行う
 
 " ファイル処理関連の設定
-
 set confirm    " 保存されていないファイルがあるときは終了前に保存確認
 set hidden     " 保存されていないファイルがあるときでも別のファイルを開くことが出来る
 set autoread   "外部でファイルに変更がされた場合は読みなおす
@@ -32,14 +29,12 @@ set nobackup   " ファイル保存時にバックアップファイルを作ら
 set noswapfile " ファイル編集中にスワップファイルを作らない
 
 " 検索/置換の設定
-
 set incsearch  " インクリメンタルサーチを行う
 set ignorecase " 大文字と小文字を区別しない
 set smartcase  " 大文字と小文字が混在した言葉で検索を行った場合に限り、大文字と小文字を区別する
 set wrapscan   " 最後尾まで検索を終えたら次の検索で先頭に移る
 
 " タブ/インデントの設定
-
 set expandtab     " タブ入力を複数の空白入力に置き換える
 set tabstop=2     " 画面上でタブ文字が占める幅
 set shiftwidth=2  " 自動インデントでずれる幅
@@ -48,20 +43,14 @@ set autoindent    " 改行時に前の行のインデントを継続する
 set smartindent   " 改行時に入力された行の末尾に合わせて次の行のインデントを増減する
 
 " コマンドラインの設定
-
-" コマンドラインモードでTABキーによるファイル名補完を有効にする
-set wildmenu wildmode=list:longest,full
-" コマンドラインの履歴を10000件保存する
-set history=10000
+set wildmenu wildmode=list:longest,full " コマンドラインモードでTABキーによるファイル名補完を有効にする
+set history=10000 " コマンドラインの履歴を10000件保存する
 
 " マウスの設定
-
 set mouse=a " 全モードでマウスを使えるように
 
 " ビープの設定
-
-" ビープ音すべてを無効にする
-set visualbell t_vb=
+set visualbell t_vb= " ビープ音すべてを無効にする
 set noerrorbells "エラーメッセージの表示時にビープを鳴らさない
 
 " スペルチェック(日本語は除外)
@@ -100,29 +89,34 @@ let mapleader = "\<Space>"
 """"""""""""
 call plug#begin('~/.local/share/nvim/plugged')
 
-Plug 'Shougo/denite.nvim', { 'do': 'nvim --headless +UpdateRemotePlugins +qall' }
-Plug 'Shougo/deoplete.nvim', { 'do': 'nvim --headless +UpdateRemotePlugins +qall' }
+" shougo
+Plug 'Shougo/denite.nvim', { 'do': 'nvim --headless +UpdateRemotePlugins +qall' } " 検索ツール？
+Plug 'Shougo/deoplete.nvim', { 'do': 'nvim --headless +UpdateRemotePlugins +qall' } " 補完
 
-Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs' "いろんなタブでNERDTreeを同時に開いたり閉じたり？
-Plug 'Xuyuanp/nerdtree-git-plugin'
+" filer周り
+Plug 'scrooloose/nerdtree' " filer
+Plug 'jistr/vim-nerdtree-tabs' "いろんなタブでNERDTreeを同時に開いたり閉じたりな奴
+Plug 'Xuyuanp/nerdtree-git-plugin' "Gitの差分表示
 
-Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter' " gitの変更を行ごとに印つけてくれる奴
 
+Plug 'joshdick/onedark.vim' " colorsheme
 
-Plug 'joshdick/onedark.vim'
-Plug 'sheerun/vim-polyglot'
+Plug 'sheerun/vim-polyglot' " いろんな言語のsyntaxとかindentとかを追加してくれる奴
 
-Plug 'vim-airline/vim-airline'
-Plug 'tpope/vim-fugitive'
+Plug 'vim-airline/vim-airline' " statuslineのカスタマイズ
+
+Plug 'tpope/vim-fugitive' " Gitのラッパー
 
 Plug 'terryma/vim-expand-region' "選択範囲の拡大縮小を便利に
 
-Plug 'chrisbra/SudoEdit.vim'
+Plug 'chrisbra/SudoEdit.vim' " sudoを毎回忘れる馬鹿用
 
-Plug 'Yggdroot/indentLine'
+Plug 'Yggdroot/indentLine' " インデントを視認しやすく
 
 Plug 'cohama/lexima.vim' "auto close 周りの自動設定
+
+Plug 'w0rp/ale' "非同期にシンタックスチェックとかしてくれる奴
 
 " javascript
 Plug 'othree/yajs.vim', { 'for': 'javascript' } "es6 color
@@ -142,9 +136,13 @@ syntax on
 colorscheme onedark
 
 """ statusline関連
+"ale
+let g:ale_statusline_format = ['E%d', 'W%d', ''] " error/warnがでてたら数を通知、何もなければ非表示
+"airline
 let g:airline_theme='onedark'
 let g:airline_left_sep=''
 let g:airline_right_sep=''
+let g:airline_section_b = '%{ALEGetStatusLine()}'
 
 " jistr/vim-nerdtree-tabs
 if argc() == 0

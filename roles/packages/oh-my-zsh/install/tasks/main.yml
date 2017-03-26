@@ -43,10 +43,18 @@
     line='[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local'
   become: no
 
-- name: copy script
+- name: copy common zshrc
   copy:
     src: zshrc.common
     dest: /home/{{ main_user_name }}/.zshrc.common
+    owner: "{{ main_user_name }}"
+    group: "{{ main_user_name }}"
+  become: no
+
+- name: copy common zshenv
+  copy:
+    src: zshenv
+    dest: /home/{{ main_user_name }}/.zshenv
     owner: "{{ main_user_name }}"
     group: "{{ main_user_name }}"
   become: no
