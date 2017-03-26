@@ -120,7 +120,7 @@ Plug 'w0rp/ale' "非同期にシンタックスチェックとかしてくれる
 " Javascript
 Plug 'othree/yajs.vim', { 'for': 'javascript' } " es6 color
 Plug 'mxw/vim-jsx' " JSX color
-Plug 'deoplete-ternjs', { 'do': 'npm install -g tern' }
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'ternjs/tern_for_vim'
 
 " Golang
