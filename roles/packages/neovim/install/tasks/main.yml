@@ -1,6 +1,6 @@
 - name: install dependency libs for building neovim
   apt: name={{ item }} state=latest update_cache=yes cache_valid_time=600
-  with_items: 
+  with_items:
     - libtool
     - libtool-bin
     - autoconf
@@ -13,14 +13,14 @@
 
 - name: install dependency libs for building neovim
   pacman: name={{ item }} state=present
-  with_items: 
+  with_items:
     - base-devel
     - cmake
     - unzip
   when: "'Arch' in ansible_distribution or 'Manjaro' in ansible_distribution"
 
 - name: downlod source code
-  git: 
+  git:
     repo: https://github.com/neovim/neovim.git
     dest: /home/{{ main_user_name }}/usr/src/neovim
     depth: 1
@@ -28,11 +28,17 @@
   become: no
 
 - name: permission
-  file: 
+  file:
     dest: /home/{{ main_user_name }}/usr/src/neovim
     owner: "{{ main_user_name }}"
     group: "{{ main_user_name }}"
     recurse: yes
+  become: no
+
+- name: distclean
+  make:
+    chdir: /home/{{ main_user_name }}/usr/src/neovim
+    target: distclean
   become: no
 
 - name: build

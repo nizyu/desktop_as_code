@@ -3,5 +3,6 @@
     src: https://releases.hashicorp.com/terraform/{{ version }}/terraform_{{ version }}_linux_amd64.zip
     dest: /home/{{ main_user_name }}/bin
     remote_src: yes
+    owner: "{{ main_user_name }}"
+    group: "{{ main_user_name }}"
     mode: 0500
-    become: no
