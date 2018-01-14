@@ -1,0 +1,27 @@
+- name: install emacs
+  apt: name=emacs state=latest update_cache=yes cache_valid_time=600
+  when: "'Debian' in ansible_distribution or 'Ubuntu' in ansible_distribution or 'mint' in ansible_distribution"
+
+- name: install emacs
+  apt: name=emacs-mozc-bin state=latest update_cache=yes cache_valid_time=600
+  when: "'Debian' in ansible_distribution or 'Ubuntu' in ansible_distribution or 'mint' in ansible_distribution"
+
+- name: install emacs
+  pacman: name=emacs state=present
+  when: "'Arch' in ansible_distribution or 'Manjaro' in ansible_distribution"
+
+- name: clone spacemacs
+  git: 
+    repo: https://github.com/syl20bnr/spacemacs.git
+    dest: /home/{{ main_user_name }}/.emacs.d
+    depth: 1
+    version: master
+  become: no
+
+- name: copy common zshrc
+  file:
+    state: link
+    force: yes
+    src: {{ repo_root }}/role/packages/emacs/files/dot_spacemacs
+    path: /home/{{ main_user_name }}/.spacemacs
+  become: no

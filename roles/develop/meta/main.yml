@@ -1,6 +1,6 @@
 dependencies:
-  - { role: packages/docker/install }
-  - { role: packages/docker-compose/install }
-  - { role: packages/node_npm/install }
-  - { role: packages/neovim/install }
-  - { role: packages/terraform/install }
+  - { role: packages/docker }
+  - { role: packages/docker-compose }
+  - { role: packages/node_npm }
+  - { role: packages/neovim }
+  - { role: packages/terraform }

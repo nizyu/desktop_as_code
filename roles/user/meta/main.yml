@@ -1,2 +1,2 @@
 dependencies:
-  - { role: packages/zsh/install }
+  - { role: packages/zsh }

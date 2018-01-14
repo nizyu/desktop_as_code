@@ -44,17 +44,17 @@
   become: no
 
 - name: copy common zshrc
-  copy:
-    src: zshrc.common
-    dest: /home/{{ main_user_name }}/.zshrc.common
-    owner: "{{ main_user_name }}"
-    group: "{{ main_user_name }}"
+  file:
+    state: link
+    force: yes
+    src: {{ repo_root }}/role/packages/oh-my-zsh/files/zshrc.common
+    path: /home/{{ main_user_name }}/.zshrc.common
   become: no
 
 - name: copy common zshenv
-  copy:
-    src: zshenv
-    dest: /home/{{ main_user_name }}/.zshenv
-    owner: "{{ main_user_name }}"
-    group: "{{ main_user_name }}"
+  file:
+    state: link
+    force: yes
+    src: {{ repo_root }}/role/packages/oh-my-zsh/files/zshenv
+    path: /home/{{ main_user_name }}/.zshenv
   become: no

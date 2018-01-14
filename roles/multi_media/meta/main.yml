@@ -1,2 +1,2 @@
 dependencies:
-  - { role: packages/chromium/install }
+  - { role: packages/chromium }
