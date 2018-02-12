@@ -58,3 +58,11 @@
     src: "{{ repo_root }}/roles/packages/oh-my-zsh/files/zshenv"
     path: /home/{{ main_user_name }}/.zshenv
   become: no
+
+- name: copy common zprofile
+  file:
+    state: link
+    force: yes
+    src: "{{ repo_root }}/roles/packages/oh-my-zsh/files/zprofile"
+    path: /home/{{ main_user_name }}/.zprofile
+  become: no

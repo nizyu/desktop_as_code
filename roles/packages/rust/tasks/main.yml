@@ -1,0 +1,19 @@
+- name: download rustup script
+  get_url:
+    url: https://sh.rustup.rs 
+    dest: /tmp/rustup.sh
+    owner: "{{ main_user_name }}"
+    group: "{{ main_user_name }}"
+    mode: 0700
+
+- name: exec rustup
+  script: /tmp/rustup.sh -y
+
+- name: install essential packages
+  command: "/home/{{ main_user_name }}/.cargo/bin/cargo install {{ item }} --force"
+  with_items:
+    - rustfmt
+    - racer
+
+- name: download rust-src
+  command: "/home/{{ main_user_name }}/.cargo/bin/rustup component add rust-src"
