@@ -47,7 +47,7 @@
   file:
     state: link
     force: yes
-    src: {{ repo_root }}/role/packages/oh-my-zsh/files/zshrc.common
+    src: "{{ repo_root }}/role/packages/oh-my-zsh/files/zshrc.common"
     path: /home/{{ main_user_name }}/.zshrc.common
   become: no
 
@@ -55,6 +55,6 @@
   file:
     state: link
     force: yes
-    src: {{ repo_root }}/role/packages/oh-my-zsh/files/zshenv
+    src: "{{ repo_root }}/role/packages/oh-my-zsh/files/zshenv"
     path: /home/{{ main_user_name }}/.zshenv
   become: no
