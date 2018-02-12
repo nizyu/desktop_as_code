@@ -75,7 +75,7 @@
   file:
     state: link
     force: yes
-    src: "{{ repo_root }}/role/packages/neovim/files/init.vim"
+    src: "{{ repo_root }}/roles/packages/neovim/files/init.vim"
     path: /home/{{ main_user_name }}/.config/nvim/init.vim
   become: no
 

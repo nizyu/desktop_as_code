@@ -22,6 +22,6 @@
   file:
     state: link
     force: yes
-    src: {{ repo_root }}/role/packages/emacs/files/dot_spacemacs
+    src: "{{ repo_root }}/roles/packages/emacs/files/dot_spacemacs"
     path: /home/{{ main_user_name }}/.spacemacs
   become: no

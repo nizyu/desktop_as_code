@@ -3,4 +3,5 @@ dependencies:
   - { role: packages/docker-compose }
   - { role: packages/node_npm }
   - { role: packages/neovim }
+  - { role: packages/emacs }
   - { role: packages/terraform }
