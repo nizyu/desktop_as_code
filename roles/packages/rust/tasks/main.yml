@@ -4,16 +4,19 @@
     dest: /tmp/rustup.sh
     owner: "{{ main_user_name }}"
     group: "{{ main_user_name }}"
-    mode: 0700
+    mode: 0755
 
 - name: exec rustup
-  script: /tmp/rustup.sh -y
+  become: no
+  shell: /tmp/rustup.sh -y
 
 - name: install essential packages
-  command: "/home/{{ main_user_name }}/.cargo/bin/cargo install {{ item }} --force"
+  become: no
+  shell: "/home/{{ main_user_name }}/.cargo/bin/cargo install {{ item }} --force"
   with_items:
     - rustfmt
     - racer
 
 - name: download rust-src
+  become: no
   command: "/home/{{ main_user_name }}/.cargo/bin/rustup component add rust-src"
