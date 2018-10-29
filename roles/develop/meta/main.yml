@@ -5,4 +5,5 @@ dependencies:
   - { role: packages/neovim }
   - { role: packages/emacs }
   - { role: packages/terraform }
+  - { role: packages/scala }
   - { role: packages/rust }

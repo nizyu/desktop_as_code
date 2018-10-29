@@ -18,7 +18,7 @@
     version: master
   become: no
 
-- name: copy common zshrc
+- name: symlink dot_spacemacs file
   file:
     state: link
     force: yes

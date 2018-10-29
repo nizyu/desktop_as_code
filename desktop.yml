@@ -7,6 +7,5 @@
     - user_utilities
     - desktop
     - develop
-    - multi_media
   become: true
   tasks:

@@ -5,3 +5,22 @@
 - name: install go
   pacman: name=go state=present
   when: "'Arch' in ansible_distribution or 'Manjaro' in ansible_distribution"
+
+- name: install go develop helper packages
+  command: "go get -u -v {{ item }}"
+  become: false
+  environment:
+    GO_PATH: ~/usr/lib/go # note: exists duplicated definition => roles/packages/go
+  with_items:
+    - github.com/nsf/gocode
+    - github.com/rogpeppe/godef
+    - golang.org/x/tools/cmd/guru
+    - golang.org/x/tools/cmd/gorename
+    - golang.org/x/tools/cmd/goimports
+    - github.com/alecthomas/gometalinter
+
+- name: update gometalinter
+  command: "gometalinter --install --update"
+  become: false
+  environment:
+    PATH: /home/{{ main_user_name }}/usr/lib/go/bin:{{ ansible_env.PATH }}
