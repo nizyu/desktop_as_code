@@ -5,3 +5,6 @@
 - name: install zsh
   pacman: name=zsh state=present
   when: "'Arch' in ansible_distribution or 'Manjaro' in ansible_distribution"
+
+- name: set zsh as default shell
+  command: chsh -s '/bin/zsh' {{ main_user_name }}

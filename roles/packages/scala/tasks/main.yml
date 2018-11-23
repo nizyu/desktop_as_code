@@ -1,14 +1,14 @@
+- name: Add an apt key by id from a keyserver
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: 2EE0EA64E40A89B84B2DF73499E82A75642AC823
+  when: "'Debian' in ansible_distribution or 'Ubuntu' in ansible_distribution or 'mint' in ansible_distribution"
+
 - name: add apt-repo for install sbt
   apt_repository:
     repo: deb https://dl.bintray.com/sbt/debian /
     state: present
   when: "'Debian' in ansible_distribution or 'Ubuntu' in ansible_distribution or 'mint' in ansible_distribution"
-
-- name: Add an apt key by id from a keyserver
-  apt_key:
-    keyserver: keyserver.ubuntu.com
-    id: 2EE0EA64E40A89B84B2DF73499E82A75642AC823
-: "'Debian' in ansible_distribution or 'Ubuntu' in ansible_distribution or 'mint' in ansible_distribution"
 
 - name: install openjdk8
   apt: name={{ item }} state=latest update_cache=yes cache_valid_time=600

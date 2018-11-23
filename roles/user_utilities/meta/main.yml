@@ -2,3 +2,4 @@ dependencies:
   - { role: packages/direnv }
   - { role: packages/oh-my-zsh }
   - { role: packages/neovim }
+  - { role: packages/fcitx-mozc }

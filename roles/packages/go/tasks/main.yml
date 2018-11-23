@@ -10,7 +10,7 @@
   command: "go get -u -v {{ item }}"
   become: false
   environment:
-    GO_PATH: ~/usr/lib/go # note: exists duplicated definition => roles/packages/go
+    GOPATH: /home/{{ main_user_name }}/usr/lib/go # note: exists duplicated definition => roles/packages/oh-my-zsh
   with_items:
     - github.com/nsf/gocode
     - github.com/rogpeppe/godef
@@ -24,3 +24,4 @@
   become: false
   environment:
     PATH: /home/{{ main_user_name }}/usr/lib/go/bin:{{ ansible_env.PATH }}
+    GOPATH: /home/{{ main_user_name }}/usr/lib/go # note: exists duplicated definition => roles/packages/oh-my-zsh

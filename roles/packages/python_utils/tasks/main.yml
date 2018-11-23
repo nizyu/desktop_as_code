@@ -3,6 +3,8 @@
   with_items:
     - python3-pip
     - python3-setuptools
+    - python-pip
+    - python-setuptools
   when: "'Debian' in ansible_distribution or 'Ubuntu' in ansible_distribution or 'mint' in ansible_distribution"
 
 - name: install python packages

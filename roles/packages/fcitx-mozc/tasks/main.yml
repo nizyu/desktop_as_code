@@ -1,0 +1,24 @@
+- name: install fcitx mozc
+  apt: name={{ item }} state=latest update_cache=yes cache_valid_time=600
+  with_items:
+    - fcitx
+    - fcitx-mozc
+  when: "'Debian' in ansible_distribution or 'Ubuntu' in ansible_distribution or 'mint' in ansible_distribution"
+
+- name: install fcitx mozc
+  pacman: name={{ item }} state=present
+  with_items:
+    - fcitx
+    - fcitx-configtool
+    - fcitx-mozc
+  when: "'Arch' in ansible_distribution or 'Manjaro' in ansible_distribution"
+
+- name: configure to use fcitx by default
+  blockinfile:
+    dest: /home/{{ main_user_name }}/.profile
+    insertbefore: BOF
+    content: |
+      export GTK_IM_MODULE=fcitx
+      export QT_IM_MODULE=fcitx
+      export XMODIFIERS=@im=fcitx
+
