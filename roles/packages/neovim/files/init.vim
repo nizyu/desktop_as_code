@@ -148,7 +148,6 @@ let g:ale_statusline_format = ['E%d', 'W%d', ''] " error/warnがでてたら数�
 let g:airline_theme='onedark'
 let g:airline_left_sep=''
 let g:airline_right_sep=''
-let g:airline_section_b = '%{ALEGetStatusLine()}'
 
 " jistr/vim-nerdtree-tabs
 if argc() == 0
