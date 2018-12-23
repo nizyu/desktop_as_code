@@ -1,0 +1,23 @@
+- name: install zsh
+  apt: name={{ item }} state=latest update_cache=yes cache_valid_time=600
+  with_items:
+    - tree
+    - silversearcher-ag
+  when: "'Debian' in ansible_distribution or 'Ubuntu' in ansible_distribution or 'mint' in ansible_distribution"
+
+- name: install zsh
+  pacman: name={{ item }} state=present
+  with_items:
+    - tree
+    - the_silver_searcher
+  when: "'Arch' in ansible_distribution or 'Manjaro' in ansible_distribution"
+
+- name: symlink original scripts
+  file:
+    state: link
+    force: yes
+    src: "{{ repo_root }}/roles/user_utilities/files/{{ item }}"
+    path: /home/{{ main_user_name }}/bin/{{ item }}
+  with_items:
+    - brightness_contral
+  become: no

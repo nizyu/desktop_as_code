@@ -1,0 +1,68 @@
+#!/bin/bash
+# ノートPCの輝度をお手軽に変更するためのツール
+# 引数の値のだけ輝度を増減させる
+# 引数なしの場合現在の輝度を表示する
+# usage:
+#  # brightness_control display +10
+#  $ brightness_control
+set -eu
+
+BRIGHTNESS_PATH=/sys/class/backlight/
+
+function print_current_brightness () {
+    if [[ $# == 0 ]] ; then
+        for display in $(ls ${BRIGHTNESS_PATH}) ; do
+            echo "${display}: $(cat ${BRIGHTNESS_PATH}${display}/brightness) / $(cat ${BRIGHTNESS_PATH}${display}/max_brightness)"
+        done
+    else
+        echo "${1}: $(cat ${BRIGHTNESS_PATH}${1}/brightness) / $(cat ${BRIGHTNESS_PATH}${1}/max_brightness)"
+    fi
+}
+
+function change_brightness () {
+    if [[ $# != 2 ]] ; then
+        echo "Illegal argument: ${@}"
+        exit 1
+    fi
+
+    local current=$(cat ${BRIGHTNESS_PATH}/$1/brightness)
+    local max=$(cat ${BRIGHTNESS_PATH}/$1/max_brightness)
+    local expect=$current
+    if [[ $2 =~ [\+\-][1-9][0-9]* ]] ; then
+        expect=$(( ${expect} ${2:0:1} ${2:1} ))
+    else
+        expect=$2
+    fi
+
+    if [[ ${expect} > 0 || ${expect} < ${max} ]] ; then
+        set +u
+        if [ -z "${password}" ] ; then
+            echo ${expect} | tee $BRIGHTNESS_PATH${1}/brightness > /dev/null
+        else
+            sudo -k && { echo ${password}; echo ${expect}; } | sudo -S tee $BRIGHTNESS_PATH${1}/brightness > /dev/null
+        fi
+        set -u
+    else
+        echo "Illegal number: ${expect}"
+        exit 1
+    fi
+}
+
+# 現在の値の表示
+if [[ $# == 0 ]] ; then
+    print_current_brightness
+    exit 0
+fi
+
+# 輝度の修正
+if [ $(id -u) != "0" ] ; then
+    echo "You are not root user. Please tell me sudo password."
+    printf "Password: "
+    read -s password
+    echo
+    change_brightness $@
+else
+    change_brightness $@
+fi
+print_current_brightness $1
+
