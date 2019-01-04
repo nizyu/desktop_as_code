@@ -2,7 +2,7 @@
   apt: name=emacs state=latest update_cache=yes cache_valid_time=600
   when: "'Debian' in ansible_distribution or 'Ubuntu' in ansible_distribution or 'mint' in ansible_distribution"
 
-- name: install emacs
+- name: install emacs-mozc
   apt: name=emacs-mozc-bin state=latest update_cache=yes cache_valid_time=600
   when: "'Debian' in ansible_distribution or 'Ubuntu' in ansible_distribution or 'mint' in ansible_distribution"
 
@@ -25,3 +25,11 @@
     src: "{{ repo_root }}/roles/packages/emacs/files/dot_spacemacs"
     path: /home/{{ main_user_name }}/.spacemacs
   become: no
+
+- name: install aspell-en for flyspell
+  apt: name=aspell-en state=latest update_cache=yes cache_valid_time=600
+  when: "'Debian' in ansible_distribution or 'Ubuntu' in ansible_distribution or 'mint' in ansible_distribution"
+
+- name: install emacs for flyspell
+  pacman: name=aspell-en state=present
+  when: "'Arch' in ansible_distribution or 'Manjaro' in ansible_distribution"
