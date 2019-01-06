@@ -19,5 +19,5 @@
     src: "{{ repo_root }}/roles/user_utilities/files/{{ item }}"
     path: /home/{{ main_user_name }}/bin/{{ item }}
   with_items:
-    - brightness_contral
+    - brightness_control
   become: no
