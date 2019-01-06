@@ -5,6 +5,7 @@
   roles:
     - groups/user
     - groups/user_utilities
+    - groups/fonts
     - groups/desktop
     - groups/develop
   become: true

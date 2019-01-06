@@ -1,0 +1,21 @@
+- name: Unarchive a font file
+  unarchive:
+    src: https://github.com/adobe-fonts/source-han-code-jp/archive/{{ version }}.tar.gz
+    dest: /tmp
+    remote_src: yes
+
+- name: create font directory
+  file:
+    path: /usr/share/fonts/opentype/source-han-code-jp
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: copy a font file to fonts directory
+  copy:
+    src: /tmp/source-han-code-jp-{{ version }}/OTC/SourceHanCodeJP.ttc
+    dest: /usr/share/fonts/opentype/source-han-code-jp
+    owner: root
+    group: root
+    mode: 0644
