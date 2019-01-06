@@ -3,9 +3,9 @@
   vars_files:
     - vars/main.yml
   roles:
-    - user
-    - user_utilities
-    - desktop
-    - develop
+    - groups/user
+    - groups/user_utilities
+    - groups/desktop
+    - groups/develop
   become: true
   tasks:
